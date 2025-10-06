@@ -1,0 +1,93 @@
+version: '3.8'
+
+# MINIMAL COST CONFIGURATION
+# Optimized for 10 users/month, ~$10-15/month total cost
+# Uses: SQLite (no RDS), single instance (no load balancer), t3.micro
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: nasa-zeus-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./nasa_zeus.db  # Use SQLite (no RDS cost)
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - JWT_ALGORITHM=${JWT_ALGORITHM:-HS256}
+      - JWT_ACCESS_TOKEN_EXPIRE_MINUTES=${JWT_ACCESS_TOKEN_EXPIRE_MINUTES:-30}
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - OPENAQ_API_KEY=${OPENAQ_API_KEY}
+      - EARTHDATA_USERNAME=${EARTHDATA_USERNAME}
+      - EARTHDATA_PASSWORD=${EARTHDATA_PASSWORD}
+    volumes:
+      - ./data:/app/data
+      - ./nasa_zeus.db:/app/nasa_zeus.db
+    restart: unless-stopped
+    mem_limit: 256m  # Limit memory for t3.micro
+    networks:
+      - nasa-zeus-network
+
+  gemini:
+    build:
+      context: .
+      dockerfile: Dockerfile.gemini
+    container_name: nasa-zeus-gemini
+    ports:
+      - "8001:8001"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+    volumes:
+      - ./data:/app/data
+      - ./MACHINE_LEARNING:/app/MACHINE_LEARNING
+    depends_on:
+      - backend
+    restart: unless-stopped
+    mem_limit: 256m  # Limit memory for t3.micro
+    networks:
+      - nasa-zeus-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: nasa-zeus-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:8000}
+      - NEXT_PUBLIC_GEMINI_URL=${NEXT_PUBLIC_GEMINI_URL:-http://gemini:8001}
+      - NODE_ENV=production
+    depends_on:
+      - backend
+      - gemini
+    restart: unless-stopped
+    mem_limit: 256m  # Limit memory for t3.micro
+    networks:
+      - nasa-zeus-network
+
+  nginx:
+    image: nginx:alpine  # Alpine is smaller
+    container_name: nasa-zeus-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+      - gemini
+    restart: unless-stopped
+    mem_limit: 64m  # Nginx is lightweight
+    networks:
+      - nasa-zeus-network
+
+networks:
+  nasa-zeus-network:
+    driver: bridge
+
+# Note: Total memory usage ~832MB fits comfortably in t3.micro (1GB RAM)
