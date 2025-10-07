@@ -7,7 +7,7 @@ python-multipart
 SQLAlchemy
 google-generativeai
 python-dotenv
-xgboost>=2.0.0
+xgboost<2.0.0  # Use version 1.7.x for CPU-only support (no CUDA required)
 pandas>=2.0.0
 numpy>=1.24.0
 torch>=2.0.0
