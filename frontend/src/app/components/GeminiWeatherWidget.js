@@ -18,8 +18,9 @@ export default function GeminiWeatherWidget({ location = "New York City" }) {
 
     try {
       console.log('🔵 Fetching atmospheric data...');
+      const GEMINI_URL = process.env.NEXT_PUBLIC_GEMINI_URL || 'http://localhost:8001';
       const response = await fetch(
-        `http://localhost:8001/atmospheric-data?location=${encodeURIComponent(location)}`
+        `${GEMINI_URL}/atmospheric-data?location=${encodeURIComponent(location)}`
       );
 
       console.log('🔵 Response status:', response.status);
@@ -58,8 +59,9 @@ export default function GeminiWeatherWidget({ location = "New York City" }) {
 
     try {
       console.log('🟣 Predicting O3...');
+      const GEMINI_URL = process.env.NEXT_PUBLIC_GEMINI_URL || 'http://localhost:8001';
       const response = await fetch(
-        `http://localhost:8001/predict-o3?location=${encodeURIComponent(location)}`
+        `${GEMINI_URL}/predict-o3?location=${encodeURIComponent(location)}`
       );
 
       console.log('🟣 O3 Response status:', response.status);

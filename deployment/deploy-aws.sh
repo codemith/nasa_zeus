@@ -22,7 +22,8 @@ NC='\033[0m' # No Color
 
 # Configuration
 REGION="us-east-1"
-INSTANCE_TYPE="t3.micro"  # Changed from t3.medium for low traffic (saves ~$22/month)
+AMI_ID="ami-0c02fb55d7b3d91df"  # Amazon Linux 2023 (check for latest)
+INSTANCE_TYPE="t3.small"  # t3.small for Docker deployment (2 vCPU, 2GB RAM) - good balance
 KEY_NAME="nasa-zeus-key"
 SECURITY_GROUP_NAME="nasa-zeus-sg"
 INSTANCE_NAME="nasa-zeus-app"
