@@ -1,0 +1,10 @@
+# O3 Modeling Notebook Requirements
+# Install with: pip install -r MACHINE_LEARNING/requirements_ml.txt
+
+pandas>=2.3.0
+numpy>=1.26.0
+torch>=2.4.0
+xgboost>=2.0.0
+scikit-learn>=1.4.0
+tensorboard>=2.17.0
+tqdm>=4.66.0

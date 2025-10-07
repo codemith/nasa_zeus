@@ -1,0 +1,87 @@
+# =============================================================================
+# NASA ZEUS AIR QUALITY SYSTEM - ENVIRONMENT VARIABLES
+# =============================================================================
+# IMPORTANT: Copy this file to .env and fill in your actual values
+# DO NOT commit .env file to version control!
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# BACKEND (FastAPI) CONFIGURATION
+# -----------------------------------------------------------------------------
+
+# JWT Secret Key (Generate a secure random string)
+# Generate one with: openssl rand -hex 32
+# OR: python -c "import secrets; print(secrets.token_hex(32))"
+JWT_SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+
+# JWT Algorithm
+JWT_ALGORITHM=HS256
+
+# JWT Token Expiration (in minutes)
+JWT_ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# -----------------------------------------------------------------------------
+# API KEYS
+# -----------------------------------------------------------------------------
+
+# Gemini AI API Key (for AI Weather Agent)
+# Get your free key from: https://aistudio.google.com/app/apikey
+# Free tier: 15 requests/min, 1M tokens/day
+GEMINI_API_KEY=your-gemini-api-key-here
+
+# OpenWeatherMap API Key (for forecast data)
+# Get your free key at: https://openweathermap.org/api
+# Free tier: 60 calls/min
+OPENWEATHER_API_KEY=your-openweather-api-key-here
+
+# OpenAQ API Key (Optional - v3 API works without it)
+# Get your key at: https://openaq.org/
+OPENAQ_API_KEY=
+
+# NASA Earthdata Login (for TEMPO, SAGE II data downloads)
+# Register at: https://urs.earthdata.nasa.gov/
+EARTHDATA_USERNAME=your-username
+EARTHDATA_PASSWORD=your-password
+
+# -----------------------------------------------------------------------------
+# DATABASE CONFIGURATION
+# -----------------------------------------------------------------------------
+
+# Database URL (SQLite by default, use PostgreSQL for production)
+DATABASE_URL=sqlite:///./nasa_zeus.db
+# For PostgreSQL: postgresql://user:password@localhost:5432/nasa_zeus
+
+# -----------------------------------------------------------------------------
+# APPLICATION SETTINGS
+# -----------------------------------------------------------------------------
+
+# Environment (development, staging, production)
+ENVIRONMENT=development
+
+# Backend API Port
+PORT=8000
+
+# CORS Origins (comma-separated, use specific domains in production)
+CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+
+# Default Location Settings
+DEFAULT_LAT=40.7128
+DEFAULT_LON=-74.0060
+DEFAULT_RADIUS=25000
+
+# -----------------------------------------------------------------------------
+# FRONTEND (Next.js) CONFIGURATION
+# -----------------------------------------------------------------------------
+
+# API Base URL (backend endpoint)
+NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# =============================================================================
+# SETUP INSTRUCTIONS
+# =============================================================================
+# 1. Copy this file: cp .env.example .env
+# 2. Generate JWT secret: openssl rand -hex 32
+# 3. Get API keys from respective providers (links above)
+# 4. Update NEXT_PUBLIC_API_URL for production deployment
+# 5. Never commit .env file to git!
+# =============================================================================

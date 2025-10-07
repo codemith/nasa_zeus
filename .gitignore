@@ -1,0 +1,120 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.eslintcache
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+build/
+
+# Package managers
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Python specific lib directories (avoid conflicting with frontend/src/lib)
+**/site-packages/
+**/dist-packages/
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Testing
+.pytest_cache/
+
+# Large data files (NetCDF, etc.)
+*.nc
+tempo_data_nyc/
+data/*.png
+data/*.csv
+.coverage
+htmlcov/
+
+# FastAPI
+.mypy_cache/
+TEMPO_NO2_L2_NRT_V02_20251003T234442Z_S014G06.nc
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+*.cache
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage reports
+coverage/
+*.lcov
+.nyc_output
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Test output files
+o3_prediction_test_*.json
+
+# Deployment scripts (keep in repo but ignore temp versions)
+# deploy-aws.sh
+# docker-compose*.yml
+
+frontend/.env.local
