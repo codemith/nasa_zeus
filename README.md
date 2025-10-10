@@ -1,6 +1,6 @@
-<div align="center">
+<div align="left">
 
-# NASA Zeus Air Quality Monitoring System
+# NASA Zeus Air Quality Monitoring System - www.nasazeus.org
 
 ### *Real-time Air Quality Intelligence with AI-Powered Predictions*
 
@@ -122,8 +122,6 @@
 |--------|----------|-------------|
 | GET | `/atmospheric-data?location={city}` | Get atmospheric parameters |
 | GET | `/predict-o3?location={city}` | Predict O3 concentration |
-
-**Interactive API Documentation**: Visit http://localhost:8000/docs after starting the backend
 
 ---
 ## Technology Stack
