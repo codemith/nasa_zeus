@@ -13,17 +13,10 @@ This directory contains all files needed to deploy NASA Zeus to various platform
 - **`.dockerignore`** - Files to exclude from Docker builds
 - **`nginx.conf`** - Nginx reverse proxy configuration
 
-### AWS Deployment (Docker-based)
-- **`deploy-aws.sh`** - Automated AWS EC2 deployment script with Docker
+### AWS Deployment
+- **`deploy-aws.sh`** - Automated AWS EC2 deployment script
 - **`AWS_DEPLOYMENT_GUIDE.md`** - Comprehensive deployment guide (520 lines)
 - **`COST_OPTIMIZATION.md`** - Cost analysis and optimization details
-- **`setup-ec2-complete.sh`** - Complete EC2 setup script
-
-### AWS Deployment (Non-Docker - Production Domain) ⭐ NEW
-- **`deploy-nasazeus-org.sh`** - Complete deployment script for nasazeus.org (t3.small)
-- **`DEPLOY_NASAZEUS_ORG.md`** - Full deployment guide with troubleshooting
-- **`QUICKSTART_DEPLOY.md`** - Quick reference for nasazeus.org deployment
-- **`DEPLOYMENT_CHECKLIST.md`** - Pre and post-deployment checklist
 
 ## 🚀 Quick Start
 
@@ -33,53 +26,6 @@ This directory contains all files needed to deploy NASA Zeus to various platform
 3. Environment variables configured in root `.env` file
 
 ### Deploy to AWS (Recommended)
-
-```bash
-cd deployment
-./deploy-aws.sh
-```
-
-**Cost**: ~$10.49/month (or FREE with AWS Free Tier for 12 months)
-
-**What it does**:
-- Creates EC2 t3.micro instance (1GB RAM, 2 vCPU)
-- Installs Docker on the instance
-- Deploys 4 containers: Backend, Frontend, Gemini AI, Nginx
-- Configures security groups (ports 80, 443, 22)
-- Provides public URL for access
-
-## 🚀 Quick Start
-
-### Option 1: Production Domain Deployment (nasazeus.org) ⭐ RECOMMENDED
-
-**Best for**: Production deployment with custom domain and SSL
-
-```bash
-cd deployment
-
-# Phase 1: Setup AWS infrastructure (local machine)
-./deploy-nasazeus-org.sh aws-setup
-
-# Phase 2: Setup server (on EC2 instance after SSH)
-./deploy-nasazeus-org.sh server-setup
-```
-
-**Features**:
-- Custom domain with automatic SSL (Let's Encrypt)
-- No Docker overhead - native PM2 process management
-- Caddy reverse proxy with auto-HTTPS
-- EC2 t3.small (2GB RAM, 2 vCPU)
-- Cost: ~$15/month
-
-📖 **See**: [QUICKSTART_DEPLOY.md](./QUICKSTART_DEPLOY.md) for 5-minute guide  
-📖 **See**: [DEPLOY_NASAZEUS_ORG.md](./DEPLOY_NASAZEUS_ORG.md) for full documentation  
-📋 **See**: [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) for checklist
-
----
-
-### Option 2: Docker-based AWS Deployment
-
-**Best for**: Quick testing, containerized deployment
 
 ```bash
 cd deployment
