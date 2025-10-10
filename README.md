@@ -4,9 +4,6 @@
 
 ### *Real-time Air Quality Intelligence with AI-Powered Predictions*
 
-[![NASA Space Apps Challenge](https://img.shields.io/badge/NASA-Space%20Apps%20Challenge-0B3D91?style=for-the-badge&logo=nasa)](https://www.spaceappschallenge.org/)
-[![Python](https://img.shie---
-
 ## Data Sources
 
 | Source | Type | Usage |
@@ -101,46 +98,6 @@
 
 ---
 
-## Quick Start
-
-### Prerequisites
-
-- Python 3.9+
-- Node.js 18+
-- npm or yarn
-- Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
-
-
-## 🚀 Production Deployment
-
-### Quick Redeploy (After Initial Setup)
-
-```bash
-# One-command redeploy for code updates
-./deployment/quick-redeploy.sh
-```
-
-### Initial AWS Deployment
-
-Deploy to AWS EC2 in minutes with our automated script:
-
-```bash
-# See detailed guide
-cat deployment/AWS_DEPLOYMENT_GUIDE.md
-
-# Quick deploy
-ssh -i your-key.pem ec2-user@YOUR_INSTANCE_IP
-./deployment/setup-ec2-complete.sh
-```
-
-**Cost**: ~$17-18/month on t3.small instance
-
-**📚 Deployment Guides**:
-- [PRODUCTION_DEPLOYMENT_GUIDE.md](PRODUCTION_DEPLOYMENT_GUIDE.md) - ⭐ **Critical fixes & configurations**
-- [AWS_DEPLOYMENT_GUIDE.md](deployment/AWS_DEPLOYMENT_GUIDE.md) - Full AWS setup instructions
-
----
-
 ## API Documentation
 
 ### Authentication Endpoints
@@ -198,67 +155,3 @@ ssh -i your-key.pem ec2-user@YOUR_INSTANCE_IP
 - **Containerization**: Docker (optional)
 
 ---
-
-## Data Sources
-
-| Source | Type | Usage |
-|--------|------|-------|
-| **OpenAQ** | Ground Stations | Real-time PM2.5, PM10, O3, NO2, SO2, CO |
-| **NASA TEMPO** | Satellite | Tropospheric air quality observations |
-| **NASA MERRA-2** | Reanalysis | Historical atmospheric data (15,552 records) |
-| **NOAA GFS** | Model | Weather forecasts and atmospheric parameters |
-| **NOAA METAR** | Ground Stations | Surface temperature and pressure |
-
----```
-nasa-zeus/
-├── main.py                 # FastAPI backend server
-├── gemini_api.py          # Gemini AI agent endpoints
-├── o3_predictor.py        # Ozone prediction model
-├── frontend/              # Next.js React application
-│   └── src/
-│       ├── app/           # Next.js pages and layouts
-│       └── components/    # React components (Map, Charts, etc.)
-├── preprocess/            # Data collection scripts
-│   └── collect_air_quality_data.py
-├── MACHINE_LEARNING/      # ML models and training
-│   └── o3_model.ipynb
-├── deployment/            # 🆕 Deployment files and guides
-│   ├── deploy-aws.sh
-│   ├── docker-compose.yml
-│   └── AWS_DEPLOYMENT_GUIDE.md
-└── data/                  # CSV datasets and analysis
-```
-
-## 🛠️ Technology Stack
-
-**Backend**:
-- FastAPI (Python) - REST API
-- SQLite - Data persistence
-- httpx - Async HTTP client
-
-**Frontend**:
-- Next.js 15 - React framework
-- React Leaflet - Map visualization
-- Tailwind CSS - Styling
-- Chart.js - Data visualization
-
-**AI/ML**:
-- Google Gemini - AI agent
-- PyTorch - O3 prediction model
-- Pandas/NumPy - Data processing
-
-**Deployment**:
-- Docker & Docker Compose
-- Nginx - Reverse proxy
-- AWS EC2 - Cloud hosting
-
-## 🌐 API Data Sources
-
-| Source | Purpose | API Key Required |
-|--------|---------|------------------|
-| [OpenAQ](https://openaq.org/) | Ground station data | Optional (recommended) |
-| [NASA TEMPO](https://tempo.si.edu/) | Satellite observations | No |
-| [OpenWeatherMap](https://openweathermap.org/) | Weather forecasts | Yes |
-| [Google Gemini](https://ai.google.dev/) | AI agent | Yes |
-
-**Ready to deploy?** Check out [deployment/README.md](./deployment/README.md)
