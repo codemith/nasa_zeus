@@ -111,7 +111,16 @@
 - Google Gemini API key ([Get one here](https://makersuite.google.com/app/apikey))
 
 
-## AWS Deployment
+## 🚀 Production Deployment
+
+### Quick Redeploy (After Initial Setup)
+
+```bash
+# One-command redeploy for code updates
+./deployment/quick-redeploy.sh
+```
+
+### Initial AWS Deployment
 
 Deploy to AWS EC2 in minutes with our automated script:
 
@@ -126,7 +135,9 @@ ssh -i your-key.pem ec2-user@YOUR_INSTANCE_IP
 
 **Cost**: ~$17-18/month on t3.small instance
 
-**Full deployment guide**: [AWS_DEPLOYMENT_GUIDE.md](deployment/AWS_DEPLOYMENT_GUIDE.md)
+**📚 Deployment Guides**:
+- [PRODUCTION_DEPLOYMENT_GUIDE.md](PRODUCTION_DEPLOYMENT_GUIDE.md) - ⭐ **Critical fixes & configurations**
+- [AWS_DEPLOYMENT_GUIDE.md](deployment/AWS_DEPLOYMENT_GUIDE.md) - Full AWS setup instructions
 
 ---
 
