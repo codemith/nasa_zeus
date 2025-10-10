@@ -229,9 +229,18 @@ async def get_tempo_json_api():
         "time": "1751217462000,1726357500000",
         "f": "json"
     }
-    async with httpx.AsyncClient() as client:
-        response = await client.get(image_server_url, params=query_params)
-        return response.json()
+    
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(image_server_url, params=query_params)
+            response.raise_for_status()
+            return response.json()
+    except httpx.TimeoutException:
+        raise HTTPException(status_code=504, detail="NASA TEMPO API timeout - please try again")
+    except httpx.HTTPError as e:
+        raise HTTPException(status_code=502, detail=f"NASA TEMPO API error: {str(e)}")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching TEMPO data: {str(e)}")
     # Sample output for the NO2 value.    
     #     {
     #   "objectId": 0,
