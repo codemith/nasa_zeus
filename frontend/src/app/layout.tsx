@@ -18,8 +18,12 @@ export const metadata: Metadata = {
 	description: "An AI-powered air quality forecasting platform using NASA data.",
 	metadataBase: new URL('https://nasazeus.org'),
 	icons: {
-		icon: '/logo.png?v=2',
-		apple: '/logo.png?v=2',
+		icon: [
+			{ url: '/favicon.ico' },
+			{ url: '/logo.png', sizes: '512x512', type: 'image/png' },
+		],
+		apple: '/logo.png',
+		shortcut: '/favicon.ico',
 	},
 };
 
