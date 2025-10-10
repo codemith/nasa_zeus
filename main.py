@@ -32,6 +32,11 @@ app.add_middleware(
         "http://127.0.0.1:3000", 
         "http://127.0.0.1:3001",
         "http://0.0.0.0:3000",
+        "https://nasazeus.org",
+        "https://www.nasazeus.org",
+        "http://nasazeus.org",
+        "http://www.nasazeus.org",
+        "http://98.80.14.227",
         "*"
     ],
     allow_credentials=True,
