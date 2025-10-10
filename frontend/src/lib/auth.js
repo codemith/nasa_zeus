@@ -89,9 +89,9 @@ const apiRequest = async (endpoint, options = {}) => {
 export const register = async (userData) => {
     try {
         console.log('Attempting registration with:', userData);
-        console.log('API URL:', `${API_BASE_URL}/auth/register`);
+        console.log('API URL:', `${API_BASE_URL}/api/auth/register`);
 
-        const response = await apiRequest('/auth/register', {
+        const response = await apiRequest('/api/auth/register', {
             method: 'POST',
             body: JSON.stringify(userData),
         });
@@ -110,7 +110,7 @@ export const register = async (userData) => {
 };
 
 export const login = async (credentials) => {
-    const response = await apiRequest('/auth/login', {
+    const response = await apiRequest('/api/auth/login', {
         method: 'POST',
         body: JSON.stringify(credentials),
     });
@@ -130,7 +130,7 @@ export const logout = () => {
 
 export const getCurrentUser = async () => {
     try {
-        const user = await apiRequest('/auth/me');
+        const user = await apiRequest('/api/auth/me');
         setUser(user);
         return user;
     } catch (error) {

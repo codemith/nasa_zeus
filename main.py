@@ -617,7 +617,7 @@ async def startup_event():
     create_tables()
 
 # Authentication endpoints
-@app.post("/auth/register", response_model=dict)
+@app.post("/api/auth/register", response_model=dict)
 async def register_user(user: UserCreate, db: Session = Depends(get_db)):
     """Register a new user."""
     print(f"Registration attempt for: {user.email}")
@@ -685,7 +685,7 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)):
         }
     }
 
-@app.post("/auth/login", response_model=dict)
+@app.post("/api/auth/login", response_model=dict)
 async def login_user(user: UserLogin, db: Session = Depends(get_db)):
     """Login user and return JWT token."""
     # Find user by email
@@ -718,7 +718,7 @@ async def login_user(user: UserLogin, db: Session = Depends(get_db)):
         }
     }
 
-@app.get("/auth/me", response_model=UserResponse)
+@app.get("/api/auth/me", response_model=UserResponse)
 async def get_current_user_info(current_user: User = Depends(get_current_user)):
     """Get current authenticated user information."""
     return current_user
