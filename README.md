@@ -1,6 +1,6 @@
 <div align="left">
 
-# NASA Zeus Air Quality Monitoring System - www.nasazeus.org
+# NASA Zeus Air Quality Monitoring System 
 
 ### *Real-time Air Quality Intelligence with AI-Powered Predictions*
 
