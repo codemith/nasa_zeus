@@ -24,7 +24,7 @@ try:
     XGBOOST_AVAILABLE = True
 except ImportError:
     XGBOOST_AVAILABLE = False
-    print("⚠️  XGBoost not installed. Install with: pip install xgboost")
+    print("XGBoost not installed. Install with: pip install xgboost")
 
 # For PyTorch model
 try:
@@ -33,7 +33,7 @@ try:
     PYTORCH_AVAILABLE = True
 except ImportError:
     PYTORCH_AVAILABLE = False
-    print("⚠️  PyTorch not installed. Install with: pip install torch")
+    print("PyTorch not installed. Install with: pip install torch")
 
 
 class O3Predictor:
@@ -59,10 +59,10 @@ class O3Predictor:
         # Load historical data for TOX fallback
         if os.path.exists(self.csv_path):
             self.historical_data = pd.read_csv(self.csv_path)
-            print(f"✅ Loaded {len(self.historical_data)} historical records for fallback")
+            print(f"Loaded {len(self.historical_data)} historical records for fallback")
         else:
             self.historical_data = None
-            print(f"⚠️  Historical data not found at {self.csv_path}")
+            print(f"Historical data not found at {self.csv_path}")
         
         # Load model
         self._load_model()
@@ -74,9 +74,9 @@ class O3Predictor:
             if os.path.exists(model_path):
                 self.model = xgb.Booster()
                 self.model.load_model(model_path)
-                print(f"✅ Loaded XGBoost model from {model_path}")
+                print(f"Loaded XGBoost model from {model_path}")
             else:
-                print(f"❌ XGBoost model not found at {model_path}")
+                print(f"XGBoost model not found at {model_path}")
         
         elif self.model_type == 'pytorch' and PYTORCH_AVAILABLE:
             model_path = os.path.join(self.model_dir, 'o3_model_epoch10.pt')
@@ -85,9 +85,9 @@ class O3Predictor:
                 # self.model = YourModelClass()
                 # self.model.load_state_dict(torch.load(model_path))
                 # self.model.eval()
-                print("✅ PyTorch model loading ready (need architecture definition)")
+                print("PyTorch model loading ready (need architecture definition)")
             else:
-                print(f"❌ PyTorch model not found at {model_path}")
+                print(f"PyTorch model not found at {model_path}")
     
     def get_parameter_fallback(self, param_name: str, location: str = "New York City") -> Optional[float]:
         """
@@ -107,7 +107,7 @@ class O3Predictor:
         # For NYC, get average value from dataset
         if param_name in self.historical_data.columns:
             param_mean = self.historical_data[param_name].mean()
-            print(f"📊 Using average {param_name} from historical data: {param_mean}")
+            print(f"Using average {param_name} from historical data: {param_mean}")
             return param_mean
         
         return None
@@ -134,10 +134,10 @@ class O3Predictor:
                 
                 # Check if value is available
                 if value == 'unavailable' or value is None:
-                    print(f"⚠️  {param_name} is unavailable, using historical fallback")
+                    print(f"{param_name} is unavailable, using historical fallback")
                     fallback_value = self.get_parameter_fallback(param_name)
                     if fallback_value is None:
-                        print(f"❌ No fallback available for {param_name}")
+                        print(f"No fallback available for {param_name}")
                         return None
                     value = fallback_value
                 
@@ -146,7 +146,7 @@ class O3Predictor:
                     try:
                         value = float(value)
                     except ValueError:
-                        print(f"❌ Cannot convert {param_name} value '{value}' to float")
+                        print(f"Cannot convert {param_name} value '{value}' to float")
                         return None
                 
                 features[param_name] = value
@@ -184,11 +184,11 @@ class O3Predictor:
                            'hour', 'dayofyear', 'sin_hour', 'cos_hour', 'sin_doy', 'cos_doy']
             feature_array = np.array([features[name] for name in feature_order])
             
-            print(f"✅ Features prepared: {dict(zip(feature_order, feature_array))}")
+            print(f"Features prepared: {dict(zip(feature_order, feature_array))}")
             return feature_array.reshape(1, -1)
         
         except Exception as e:
-            print(f"❌ Error preparing features: {str(e)}")
+            print(f"Error preparing features: {str(e)}")
             return None
     
     def predict_o3(self, atmospheric_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
@@ -285,7 +285,7 @@ class O3Predictor:
 
 # Standalone testing
 if __name__ == "__main__":
-    print("🧪 Testing O3 Predictor\n")
+    print("Testing O3 Predictor\n")
     
     # Initialize predictor
     predictor = O3Predictor(model_type='xgboost')
@@ -305,7 +305,7 @@ if __name__ == "__main__":
     }
     
     # Make prediction
-    print("\n🔮 Making O3 prediction...")
+    print("\nMaking O3 prediction...")
     result = predictor.predict_o3(sample_data)
     
     print("\n" + "="*60)
